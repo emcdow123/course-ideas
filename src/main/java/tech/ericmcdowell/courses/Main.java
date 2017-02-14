@@ -12,12 +12,14 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.staticFileLocation;
 
 /**
  * Created by eric on 2/13/17.
  */
 public class Main {
     public static void main(String[] args) {
+        staticFileLocation("/public");
 
         CourseIdeaDAO dao = new SimpleCourseIdeaDAO();
 
@@ -33,7 +35,6 @@ public class Main {
             String username = req.queryParams("username");
             model.put("username", username);
             res.cookie("username", username);
-
 
             return new ModelAndView(model, "sign-in.hbs");
         }, new HandlebarsTemplateEngine());
